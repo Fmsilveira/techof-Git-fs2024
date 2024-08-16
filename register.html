@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="./register.css">
+  <link rel="stylesheet" href="./header.css">
+</head>
+
+<body>
+  <div id="header"></div>
+
+    <h3>Register on the Flat Finder</h3>
+
+  <form id="registerForm"></form>
+  <input type="text" id="first-name" placeholder="First Name"> <br>
+  <input type="text" id="last-name" placeholder="Last Name"> <br>
+  <input type="email" id="email" pattern=".+@.*\.com" placeholder="Email"> <br>
+  <input type="password" id="password" placeholder="Password"> <br>
+  <input type="Date" id="birth-date" placeholder="Birth Date"> <br>
+
+  <button id="register" onclick="addUser()">Register</button> <br>
+
+  <div>
+    <ul id="users"></ul>
+  </div>
+
+  <script src="./header.js"></script>
+  <script>
+ const users = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [];
+
+function addUser() {
+  const firstName = document.getElementById('first-name').value;
+  const lastName = document.getElementById('last-name').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+  const date= document.getElementById('birth-date').value;
+  console.log('addUser')
+
+  users.push({
+    firstName,
+    lastName,
+    email,
+    password,
+    date,
+  });
+
+  localStorage.setItem('users', JSON.stringify(users));
+  alert("Registration Successfully")
+  window.location.href ='./profile.html';
+}
+
+  </script>
+</body>
+
+</html>

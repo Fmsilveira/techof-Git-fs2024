@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Profile</title>
+  <link rel="stylesheet" href="./login.css">
+  <link rel="stylesheet" href="./profile.css">
+</head>
+
+<body>
+  <div id="header"></div>
+    <div>
+    <button id="load" onclick="loadUsers()">Profile</button> <br>
+</div> 
+
+<div>
+    <h2>You can update your profile data</h2>
+</div>
+<form id="updateForm"></form>
+  <input type="text" id="first-name" placeholder="First Name"> <br>
+  <input type="text" id="last-name" placeholder="Last Name"> <br>
+  <input type="email" id="email" pattern=".+@.*\.com" placeholder="Email"> <br>
+  <input type="password" id="password" placeholder="Password"> <br>
+  <input type="Date" id="birth-date" placeholder="Birth Date"> <br>
+</div>
+<div>
+    <button id="saveUsers" onclick="saveUsers()">Save</button> <br>
+
+</div> 
+
+
+<div id="userInfo"></div>
+<script src="./header.js"></script>
+
+<script>
+    
+function loadUsers() {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    const userInfo = document.getElementById('userInfo')
+
+    if (userInfo) {
+        userInfo.innerHTML = `
+            <p>First Name: ${userData.firstName}</p>
+            <p>Last Name:${userData.lastName}</p>
+            <p>Birth Date: ${userData.date}</p>
+            <p>Email: ${userData.email}</p>`;
+}
+
+}
+ const user = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [];
+function saveUsers() {
+    const userInfo = document.getElementById('userInfo')
+    const firstName = document.getElementById('first-name').value;
+    const lastName = document.getElementById('last-name').value;
+    const date = document.getElementById('birth-date').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    users.push({
+    firstName,
+    lastName,
+    email,
+    password,
+    date,
+  });
+
+  localStorage.setItem('users', JSON.stringify(users));
+    console.log(firstName,lastName,email,password,date);
+    alert('Login credentials updated successfully!');
+}
+
+
+
+
+
+</script>
+</body>
+
+</html>

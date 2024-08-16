@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> All Flats</title>
+    <link rel="stylesheet" href="./Flats.css">
+    <link rel="stylesheet" href="./header.css">
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="Flats"></div>
+    <script src="./favorites.js"></script>
+    <script src="./header.js"></script>
+
+    <!-- // <script>
+    //     //localStorage.setItem('flats', JSON.stringify([
+    //         {
+    //             id: 1,
+    //             city: "Lisboa",
+    //             street: "Antonio Saude",
+    //             number: 13,
+    //             area: 100,
+    //             ac: "Yes",
+    //             built: 1987,
+    //             price: 450.000€,
+    //             available: "3 weeks",
+    //             image:  "R. Antonio Saude.jpg"
+    //         },
+    //         {
+    //             id: 2,
+    //             city: "Porto",
+    //             street: "Avenida Boavista",
+    //             number: 45,
+    //             area: 95,
+    //             ac: "no",
+    //             built: 1969, 
+    //             price: 320.000€,
+    //             available: "1 month",
+    //             image:  "Av. Boavista.jpg"
+    //         },
+    //         {
+    //             id: 3,
+    //             city: "Faro",
+    //             street: "Rua 5 Outubro",
+    //             number: 78,
+    //             area: 98,
+    //             ac: "yes",
+    //             built: 1993,
+    //             price: 270.000€,
+    //             available: "1 week",
+    //             image:  "Rua 5 Outubro.jpg",
+    //         },
+    //         {
+    //             id: 4,
+    //             city: "Coimbra",
+    //             street: "Rua Mocambique",
+    //             number: 76,
+    //             area: 86,
+    //             ac: "no",
+    //             built: 1998,
+    //             price: 150.000€,
+    //             available: "4 months",
+    //             image: "Moçambique.jpg",
+    //         },
+    //         {
+    //             id: 5,
+    //             city: "Lisboa",
+    //             street: "Estrada da luz",
+    //             number: 54,
+    //             area: 68,
+    //             ac: "yes",
+    //             built: 1959,
+    //             price: 500.000€,
+    //             available:"3 months",
+    //             image:  "estrada da luz.jpg"
+    //         },
+    //         {
+    //             id: 6,
+    //             city: "Porto",
+    //             street: "Avenida Aliados",
+    //             number: 3,
+    //             area: 120,
+    //             ac: "no",
+    //             built: 2007,
+    //             price: 260.000€,
+    //             available: "2 months",
+    //             image:  "av aliados.jpg"
+    //         }
+    //     ]))
+        
+    // </script> -->
+    <script>
+        const flats = JSON.parse(localStorage.getItem('flats') ?? [])
+
+
+        flats.forEach(flat => {
+            const x = document.createElement("div")
+
+            const image = document.createElement("img")
+            image.src = flat.image
+            x.appendChild(image)
+            const city = document.createElement("h2")
+            city.innerText = flat.city
+            x.appendChild(city)
+            const street = document.createElement("p")
+            street.innerText = flat.street
+            x.appendChild(street)
+            const built = document.createElement("p")
+            built.innerText = flat.built
+            x.appendChild(built)
+            const price = document.createElement("p")
+            price.innerHTML = `&#8364; ${flat.price}`;
+            x.appendChild(price)
+            const ac = document.createElement("p")
+            ac.innerText = flat.ac
+            x.appendChild(ac)
+            const area = document.createElement("p")
+            area.innerText = flat.area
+            x.appendChild(area)
+            const number = document.createElement("p")
+            number.innerText = flat.number
+            x.appendChild(number)
+            const available = document.createElement("p")
+            available.innerText = flat.available
+            x.appendChild(available)
+
+            document.getElementById("Flats").appendChild(x)
+        })
+
+    //     if (isUserLoggedIn) {
+    //         const favIconContainer = document.createElement("div");
+    //         const favButton = document.createElement("button");
+    //         favButton.id = flat.id;
+    //         favButton.innerHTML = `
+    //                 <svg height="25px" width="25px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+    //                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-10 0 600 600" xml:space="preserve">
+    //                 <path class="fav-icon" d="M474.655,74.503C449.169,45.72,413.943,29.87,375.467,29.87c-30.225,0-58.5,12.299-81.767,35.566
+    //                 c-15.522,15.523-28.33,35.26-37.699,57.931c-9.371-22.671-22.177-42.407-37.699-57.931c-23.267-23.267-51.542-35.566-81.767-35.566
+    //                 c-38.477,0-73.702,15.851-99.188,44.634C13.612,101.305,0,137.911,0,174.936c0,44.458,13.452,88.335,39.981,130.418
+    //                 c21.009,33.324,50.227,65.585,86.845,95.889c62.046,51.348,123.114,78.995,125.683,80.146c2.203,0.988,4.779,0.988,6.981,0
+    //                 c2.57-1.151,63.637-28.798,125.683-80.146c36.618-30.304,65.836-62.565,86.845-95.889C498.548,263.271,512,219.394,512,174.936
+    //                 C512,137.911,498.388,101.305,474.655,74.503z" />
+    //                 </svg>
+    //                 `;
+
+    //         favButton.onclick = function () {
+    //             const user = JSON.parse(localStorage.getItem('user') ?? '{}');
+    //             if (this.children[0].children[0].classList.contains('fav-on')) {
+    //                 this.children[0].children[0].classList.remove('fav-on');
+
+    //                 user.favorites = user.favorites.filter(fav => fav !== this.id);
+
+    //             } else {
+    //                 this.children[0].children[0].classList.add('fav-on');
+
+    //                 user.favorites.push(this.id);
+    //             }
+    //             localStorage.setItem('user', JSON.stringify(user));
+
+    //             const users = JSON.parse(localStorage.getItem('users') ?? []);
+    //             users.filter(u => u.email === user.email)[0].favorites = user.favorites;
+    //             localStorage.setItem('users', JSON.stringify(users));
+    //             location.reload();
+    //         }
+    //         favIconContainer.appendChild(favButton);
+    //         item.appendChild(favIconContainer);
+    //     }
+    // </script>
+</body>
+
+</html>

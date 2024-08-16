@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="./login.css">
+  <link rel="stylesheet" href="./header.css">
+</head>
+
+<body>
+  <div id="header"></div>
+  <div id="form"></div>
+  <div id="inputs"></div>
+
+  <script src="./header.js"></script>
+
+  <script>
+    const inputs = [
+      {
+        type: "email",
+        id: "email",
+        oninput: "validEmail()",
+        placeholder: "E-mail",
+      },
+      {
+        type: "password",
+        id: "password",
+        placeholder: "Password",
+      },
+    ];
+
+    const buttons = [
+      {
+        id: "login",
+        onclick: () => {
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+
+          const users = JSON.parse(localStorage.getItem("users") ?? [])
+
+          const [user] = users.filter(user => user.email === email)
+
+          if (!user) { return }
+          if (user.password !== password) {
+            alert("Login errado")
+            return
+          }
+
+          localStorage.setItem("user",JSON.stringify(user))
+
+          window.location.href = './home.html'
+        },
+        label: "login"
+      }
+    ];
+
+
+
+    function buildForm(formId, inputs, buttons) {
+      function validEmail() {
+        const emailInput = document.getElementById("email").value;
+        const feedbackElement = document.getElementById('emailFeedback');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (emailRegex.test(emailInput)) {
+          feedbackElement.textContent = "Email input is correct";
+        } else {
+          feedbackElement.textContent = "Please insert a valid email"
+          document.getElementById("emailFeedback").style.display = "block"
+        }
+        function validPassword() {
+          const passwordInput = document.getElementById("password").value;
+          const feedbackElements = document.getElementById('passwordFeedback');
+          const passwordregex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+
+          if (passwordregex.test(passwordInput)) {
+            feedbackElements.textContent = "Password Correct";
+          } else {
+            feedbackElements.textContent = "Wrong Password"
+            document.getElementById("passwordFeedback").style.display = "block"
+          }
+        }
+
+
+
+
+      }
+      inputs.forEach(input => {
+        const inputElement = document.createElement("input");
+        inputElement.type = input.type;
+        inputElement.id = input.id;
+        inputElement.placeholder = input.placeholder;
+        document.getElementById(formId).appendChild(inputElement);
+        if (input.type == 'email') {
+          inputElement.addEventListener('change', validEmail)
+          const p = document.createElement("p")
+
+          p.id = "emailFeedback"
+
+          document.getElementById(formId).appendChild(p);
+        }
+        document.getElementById(formId).appendChild(document.createElement("br"));
+      })
+
+
+      buttons.forEach(button => {
+        const buttonElement = document.createElement("button");
+        buttonElement.id = button.id;
+        buttonElement.onclick = button.onclick;
+        buttonElement.innerText = button.label;
+
+        document.getElementById(formId).appendChild(buttonElement);
+      })
+    };
+    document.addEventListener('onload', buildForm('form', inputs, buttons))
+  </script>
+</body>
+
+</html>
